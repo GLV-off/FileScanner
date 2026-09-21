@@ -1,3 +1,15 @@
+use clap::Parser;
+
+#[derive(Debug, Parser)]
+struct FileScannerArguments {}
+
 fn main() {
-    println!("Hello, world!");
+    match FileScannerArguments::try_parse() {
+        Ok(args) => {
+            
+        },
+        Err(error) => {
+            println!("error: {}", error);
+        }
+    }
 }

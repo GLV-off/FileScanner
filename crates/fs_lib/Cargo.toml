@@ -1,9 +1,8 @@
 [package]
-name = "fs_cli"
+name = "fs_lib"
 authors.workspace = true
 version.workspace = true
 edition.workspace = true
 license.workspace = true
 
 [dependencies]
-clap.workspace = true

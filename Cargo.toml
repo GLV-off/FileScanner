@@ -1,5 +1,15 @@
+[workspace.package]
+version = "0.1.0"
+authors = ["GLV_off <glv.off@mail.ru>"]
+edition= "2024"
+license = "MIT"
+
 [workspace]
-resolver = 2
+resolver = "2"
 members = [
-    "crates/fs_cli"
+    "crates/fs_cli", 
+    "crates/fs_lib"
 ]
+
+[workspace.dependencies]
+clap = { version = "4.6.7", features = ["derive"] }
