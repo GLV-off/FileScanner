@@ -1,0 +1,14 @@
+{
+  "name": "filescanner_frontend",
+  "version": "0.1.0",
+  "description": "Frontend application for File Scanner",
+  "keywords": [ "filescanner" ],
+  "license": "MIT",
+  "author": "GLV_off",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node out/index.js",
+    "build": "esbuild src/index.ts --bundle --minify --outfile=out/index.js"
+  } 
+}

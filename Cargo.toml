@@ -7,9 +7,10 @@ license = "MIT"
 [workspace]
 resolver = "2"
 members = [
-    "crates/fs_cli", 
+    "crates/fs_cli", "crates/fs_gui", 
     "crates/fs_lib"
 ]
 
 [workspace.dependencies]
 clap = { version = "4.6.7", features = ["derive"] }
+
