@@ -1,14 +1,20 @@
 {
-  "name": "filescanner_frontend",
-  "version": "0.1.0",
-  "description": "Frontend application for File Scanner",
-  "keywords": [ "filescanner" ],
-  "license": "MIT",
-  "author": "GLV_off",
-  "type": "commonjs",
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node out/index.js",
-    "build": "esbuild src/index.ts --bundle --minify --outfile=out/index.js"
-  } 
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "preact": "^10.29.8"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.6",
+    "@types/node": "^24.13.3",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0"
+  }
 }
