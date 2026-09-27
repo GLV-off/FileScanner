@@ -53,27 +53,35 @@ impl Builder {
     }
 
     pub fn build(&mut self) -> BuilderResult {
-        if self.desc.is_none() {
-            Err("name not ready".into())
-        } else if self.start.is_none() {
-            Err("start not ready".into())
-        } else if self.stop.is_none() {
-            Err("none not set".into())
-        } else if self.size.is_none() {
-            Err("size not set".into())
-        } else {
-            Ok(
-                Section {
-                    id: SectionID::default(),
-                    description: self.desc.clone().unwrap(),
-                    dimensions: Dimensions::new(
-                        self.start.unwrap(), 
-                        self.stop.unwrap(),
-                        self.size.unwrap()
-                    )
-                }
-            )
-        }        
+        let Some(description) = self.desc.as_ref() else {
+            return Err("name not ready".into());
+        };
+        let Some(start) = self.start else {
+            return Err("start not ready".into());
+        };
+        let Some(stop) = self.stop else {
+            return Err("stop not set".into());
+        };
+        let Some(size) = self.size else {
+            return Err("size not set".into());
+        };
+
+        if start > stop {
+            return Err(format!("start ({start}) must not exceed stop ({stop})"));
+        }
+
+        let expected = i64::from(stop) - i64::from(start);
+        if expected != i64::from(size) {
+            return Err(format!(
+                "size mismatch: stop ({stop}) - start ({start}) = {expected}, but size is {size}"
+            ));
+        }
+
+        Ok(Section {
+            id: SectionID::default(),
+            description: description.clone(),
+            dimensions: Dimensions::new(start, stop, size),
+        })
     }
 }
 
