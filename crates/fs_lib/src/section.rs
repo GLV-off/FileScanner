@@ -1,22 +1,20 @@
 #[cfg(test)]
 mod test;
 
-pub type Position = i32;
-pub type SectionName = String;
-pub type Size = i32;
+use super::dimension::{Position,  Size, Dimensions};
+
+pub type SectionID = String;
+pub type SectionDescription = String;
 
 pub struct Section {
-    name: SectionName,
-    start: Position,
-    stop: Position,
-    size: Size
+    id: SectionID,
+    description: SectionDescription,
+    dimensions: Dimensions
 }
-
-pub type Sections = Vec<Section>;
 
 #[derive(Default)]
 pub struct Builder {
-    name: Option<SectionName>,
+    desc: Option<SectionDescription>,
     start: Option<Position>,
     stop: Option<Position>,
     size: Option<Size>
@@ -27,15 +25,15 @@ type BuilderResult = Result<Section, String>;
 impl Builder {
     pub fn new() -> Self {
         Self {
-            name: None, 
+            desc: None, 
             start: None,
             stop: None,
             size: None
         }
     }
 
-    pub fn name(&mut self, name: SectionName) ->  &mut Self {
-        self.name = Some(name);
+    pub fn name(&mut self, name: SectionDescription) ->  &mut Self {
+        self.desc = Some(name);
         self
     }
 
@@ -55,7 +53,7 @@ impl Builder {
     }
 
     pub fn build(&mut self) -> BuilderResult {
-        if self.name.is_none() {
+        if self.desc.is_none() {
             Err("name not ready".into())
         } else if self.start.is_none() {
             Err("start not ready".into())
@@ -66,10 +64,13 @@ impl Builder {
         } else {
             Ok(
                 Section {
-                    name: self.name.clone().unwrap(),
-                    start: self.start.unwrap(),
-                    stop: self.stop.unwrap(),
-                    size: self.size.unwrap()
+                    id: SectionID::default(),
+                    description: self.desc.clone().unwrap(),
+                    dimensions: Dimensions::new(
+                        self.start.unwrap(), 
+                        self.stop.unwrap(),
+                        self.size.unwrap()
+                    )
                 }
             )
         }        
